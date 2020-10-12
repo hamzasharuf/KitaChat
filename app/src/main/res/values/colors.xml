@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#128C7E</color>
+    <color name="colorPrimaryDark">#075E54</color>
+    <color name="colorAccent">#25D366</color>
+    <color name="colorAccentSecondary">#fafafa</color>
+
+    <color name="splash_background">#455a64</color>
+
+    <color name="lightGreen">#25D366</color>
+    <color name="white">#FFFFFF</color>
+    <color name="outgoingChatBubble">#DCF8C6</color>
+    <color name="checkMarkBlue">#34B7F1</color>
+    <color name="chatBackground">#34B7F1</color>
+
+    <color name="lightGray">#A9D5D0D0</color>
+
+</resources>
