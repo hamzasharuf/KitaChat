@@ -15,8 +15,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.hamzasharuf.kitachat.R
 import com.hamzasharuf.kitachat.databinding.FragmentHomeBinding
 import com.hamzasharuf.kitachat.ui.base.BaseFragment
-import com.hamzasharuf.kitachat.utils.adapters.HomePagerAdapter
-import com.hamzasharuf.kitachat.utils.adapters.HomeSection
+import com.hamzasharuf.kitachat.utils.adapters.pager.HomePagerAdapter
+import com.hamzasharuf.kitachat.utils.adapters.pager.HomeSection
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.Dispatchers.Main

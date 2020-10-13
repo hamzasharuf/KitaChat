@@ -4,7 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hamzasharuf.kitachat.ui.base.BaseViewModel
-import com.hamzasharuf.kitachat.utils.adapters.HomeSection
+import com.hamzasharuf.kitachat.utils.adapters.pager.HomeSection
 
 class HomeViewModel @ViewModelInject constructor() : BaseViewModel() {
 

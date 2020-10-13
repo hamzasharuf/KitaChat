@@ -13,6 +13,7 @@
         tools:context=".ui.home.HomeFragment">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
@@ -28,6 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/TabLayoutStyle"
+                android:layout_gravity="bottom"
                 app:tabGravity="fill"
                 app:tabTextAppearance="@style/TabLayoutTextStyle"/>
 
@@ -37,7 +39,8 @@
             android:id="@+id/viewPagerHome"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
+            app:layout_anchor="@id/appbar"
+            app:layout_behavior=".utils.view.KeepWithinParentBoundsScrollingBehavior"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
@@ -47,7 +50,7 @@
             app:tint="@color/colorAccentSecondary"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
-            />
+            android:contentDescription="@string/image_description" />
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

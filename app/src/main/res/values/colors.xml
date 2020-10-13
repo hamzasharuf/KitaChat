@@ -14,5 +14,6 @@
     <color name="chatBackground">#34B7F1</color>
 
     <color name="lightGray">#A9D5D0D0</color>
+    <color name="black">#000000</color>
 
 </resources>

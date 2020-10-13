@@ -1,4 +1,4 @@
-package com.hamzasharuf.kitachat.utils.adapters
+package com.hamzasharuf.kitachat.utils.adapters.pager
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

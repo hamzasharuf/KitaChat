@@ -1,4 +1,4 @@
-package com.hamzasharuf.kitachat.utils.adapters
+package com.hamzasharuf.kitachat.utils.adapters.pager
 
 enum class HomeSection() {
     CHATS,
