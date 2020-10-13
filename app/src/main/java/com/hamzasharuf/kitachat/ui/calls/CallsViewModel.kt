@@ -1,7 +1,7 @@
 package com.hamzasharuf.kitachat.ui.calls
 
-import androidx.lifecycle.ViewModel
+import com.hamzasharuf.kitachat.ui.base.BaseViewModel
 
-class CallsViewModel : ViewModel() {
+class CallsViewModel : BaseViewModel() {
     // TODO: Implement the ViewModel
 }

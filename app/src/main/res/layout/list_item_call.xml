@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+<import type="com.hamzasharuf.kitachat.utils.adapters.list.calls.CallType"/>
         <variable
             name="clickListener"
-            type="com.hamzasharuf.kitachat.utils.adapters.list.chats.ChatsClickListener" />
+            type="com.hamzasharuf.kitachat.utils.adapters.list.calls.CallsClickListener" />
 
         <variable
             name="position"
@@ -15,7 +15,7 @@
 
         <variable
             name="item"
-            type="com.hamzasharuf.kitachat.data.models.Chat" />
+            type="com.hamzasharuf.kitachat.data.models.Call" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,11 +31,10 @@
             android:id="@+id/materialCardView"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            loadImage="@{item.profileAvatar}"
-            android:src="@drawable/person_placeholder"
-            app:cardPreventCornerOverlap="false"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/person_placeholder"/>
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
@@ -51,33 +50,45 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:text="@{item.userName}"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:text="@{item.userName}"
                 tools:text="Kareem El7alla2" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/chatDesc"
+                android:id="@+id/callDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/callName"
-                android:text="@{item.description}"
+                android:layout_marginStart="8dp"
+                android:text="@{item.date}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivCallType"
+                app:layout_constraintTop_toTopOf="@+id/ivCallType"
                 tools:text="Good night bro" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/chatDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@id/callName"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivCallType"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="8dp"
+                app:callType="@{item.callType}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/callName"
+                tools:srcCompat="@drawable/ic_arrow_upward" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/callButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/callName"
-                android:text="@{item.date}"
-                tools:text="12/03/2020" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/colorPrimary"
+                app:srcCompat="@drawable/ic_call"
+                android:contentDescription="@string/image_description" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

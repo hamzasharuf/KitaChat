@@ -21,7 +21,7 @@ class SplashFragment : BaseFragment<SplashViewModel, FragmentSplashBinding>() {
     private fun navigateToHome() {
         lifecycleScope.launch(Dispatchers.Main) {
             delay(3000)
-            findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+            findNavController().navigate(R.id.action_splashFragment_to_welcomeFragment)
         }
     }
 

@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.hamzasharuf.kitachat.R
 import com.hamzasharuf.kitachat.data.database.DummyDataSource.getChatsList
 import com.hamzasharuf.kitachat.databinding.FragmentChatsBinding
@@ -36,7 +37,7 @@ class ChatsFragment : BaseFragment<ChatsViewModel, FragmentChatsBinding>() {
             layoutManager = SpeedyLinearLayoutManager(requireContext())
             adapter = mAdapter
             hasFixedSize()
-            addItemDecoration(MarginItemDecoration(32))
+            addItemDecoration(DividerItemDecoration(requireContext(), (layoutManager as SpeedyLinearLayoutManager).orientation))
             itemAnimator = DefaultItemAnimator()
         }
     }

@@ -1,32 +1,53 @@
 package com.hamzasharuf.kitachat.ui.calls
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.hamzasharuf.kitachat.R
+import com.hamzasharuf.kitachat.data.database.DummyDataSource
+import com.hamzasharuf.kitachat.databinding.FragmentCallsBinding
+import com.hamzasharuf.kitachat.ui.base.BaseFragment
+import com.hamzasharuf.kitachat.utils.adapters.list.calls.CallsClickListener
+import com.hamzasharuf.kitachat.utils.adapters.list.calls.CallsListAdapter
+import com.hamzasharuf.kitachat.utils.view.MarginItemDecoration
+import com.hamzasharuf.kitachat.utils.view.SpeedyLinearLayoutManager
+import kotlinx.android.synthetic.main.fragment_calls.*
 
-class CallsFragment : Fragment() {
+class CallsFragment : BaseFragment<CallsViewModel, FragmentCallsBinding>() {
 
-    companion object {
-        fun newInstance() = CallsFragment()
+    lateinit var mAdapter: CallsListAdapter
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+        val list = DummyDataSource.getCallsList()
+        mAdapter.submitList(list)
+        mAdapter.notifyDataSetChanged()
     }
 
-    private lateinit var viewModel: CallsViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_calls, container, false)
+    private fun setupRecyclerView() {
+        with(rvCallsRecycler) {
+            setupAdapter()
+            layoutManager = SpeedyLinearLayoutManager(requireContext())
+            adapter = mAdapter
+            hasFixedSize()
+            addItemDecoration(DividerItemDecoration(requireContext(), (layoutManager as SpeedyLinearLayoutManager).orientation))
+            itemAnimator = DefaultItemAnimator()
+        }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CallsViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun setupAdapter() {
+        mAdapter = CallsListAdapter(CallsClickListener { item, position ->
+            Toast.makeText(
+                requireContext(),
+                "Id = ${item.userId} & position = $position",
+                Toast.LENGTH_SHORT
+            ).show()
+        })
     }
+
+    override fun getLayoutRes() = R.layout.fragment_calls
 
 }
