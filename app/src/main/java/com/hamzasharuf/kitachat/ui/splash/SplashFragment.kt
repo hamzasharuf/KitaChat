@@ -7,10 +7,12 @@ import androidx.navigation.fragment.findNavController
 import com.hamzasharuf.kitachat.R
 import com.hamzasharuf.kitachat.databinding.FragmentSplashBinding
 import com.hamzasharuf.kitachat.ui.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SplashFragment : BaseFragment<SplashViewModel, FragmentSplashBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

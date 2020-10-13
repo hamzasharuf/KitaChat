@@ -13,5 +13,17 @@
     <string name="welcome_to_kitachat">Welcome to KitaChat</string>
     <string name="agree_and_continue">AGREE AND CONTINUE</string>
     <string name="read_our_privacy_policy">Read our privacy policy. Tap agree and continue to accept the terms of service</string>
+    <string name="enter_your_phone_number">Enter your phone number</string>
+    <string name="kitachat_will_send_an_sms_message">KitaChat will send an SMS message to verify your phone number.What\'s my number?</string>
+    <string name="germany_key">049</string>
+    <string name="phone_number">phone number</string>
+    <string name="carrie_sms_charge_may_apply">Carrie SMS charge may apply</string>
+    <string name="next">Next</string>
 
+
+    <string-array name="countries_spinner">
+        <item>Egypt</item>
+        <item>Malaysia</item>
+        <item>Turkey</item>
+    </string-array>
 </resources>
