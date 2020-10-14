@@ -22,8 +22,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupNavController()
         setContentView(R.layout.activity_main)
+        setupNavController()
     }
 
     private fun setupNavController() {

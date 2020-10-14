@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "620061698098",
+    "firebase_url": "https://kitachat-8e6d6.firebaseio.com",
+    "project_id": "kitachat-8e6d6",
+    "storage_bucket": "kitachat-8e6d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:620061698098:android:8b438688095b5486dfb42b",
+        "android_client_info": {
+          "package_name": "com.hamzasharuf.kitachat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "620061698098-ocgqv1hqh00nut9vunqecfl85fujm55i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hamzasharuf.kitachat",
+            "certificate_hash": "2f34abbd6b9fc13628e34e560c9823880cfb4786"
+          }
+        },
+        {
+          "client_id": "620061698098-1hqnf9f600ql346535otke0of79hc6b1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmV_0W6BscSaC_gqDOHte0fmG3mjWNH9U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "620061698098-1hqnf9f600ql346535otke0of79hc6b1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
