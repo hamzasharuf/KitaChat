@@ -26,4 +26,9 @@
         <item>Malaysia</item>
         <item>Turkey</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="verify">Verify</string>
+    <string name="waiting_to_automatically_detect_an_sms_sent_to_your_phone_wrong_number">Waiting to automatically detect an SMS sent to your phone. Wrong number?</string>
+    <string name="default_otp">000000</string>
 </resources>
