@@ -4,6 +4,8 @@ import android.app.Activity
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asFlow
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
@@ -15,15 +17,21 @@ import com.hamzasharuf.kitachat.data.api.requests.SignInWithPhoneCredentialReque
 import com.hamzasharuf.kitachat.data.api.responses.SignInWithPhoneResponse
 import com.hamzasharuf.kitachat.data.repositories.AuthRepository
 import com.hamzasharuf.kitachat.ui.base.BaseViewModel
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.flow.FlowCollector
+import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.lang.NullPointerException
 import java.util.concurrent.TimeUnit
 
+@InternalCoroutinesApi
 class AuthViewModel @ViewModelInject constructor(
     private val authRepository: AuthRepository
 ) : BaseViewModel() {
 
-    private var mVerificationId: String? = null
-    var phoneNumber = ""
+    lateinit var mVerificationId: String
+    lateinit var phoneNumber: String
 
     var _status: MutableLiveData<SignInWithPhoneResponse> = MutableLiveData()
     val status: LiveData<SignInWithPhoneResponse>
@@ -48,15 +56,21 @@ class AuthViewModel @ViewModelInject constructor(
 
     fun signInWithPhoneAuthCredential(code: String, activity: Activity) {
         _status.value = SignInWithPhoneResponse.OnLoading
-        if (mVerificationId != null) {
+        if (mVerificationId.isNotBlank()) {
 
             // 1 - Create PhoneAuthCredential
             val credential = createPhoneAuthCredentials(code)
 
             // 2 - Sign In using the credential
-            _status = authRepository.signInWithPhoneAuthCredential(
-                SignInWithPhoneCredentialRequest(credential, activity)
-            ) as MutableLiveData<SignInWithPhoneResponse>
+            viewModelScope.launch(Main) {
+                authRepository.signInWithPhoneAuthCredential(
+                    SignInWithPhoneCredentialRequest(credential, activity)
+                ).asFlow().collect(object : FlowCollector<SignInWithPhoneResponse> {
+                    override suspend fun emit(value: SignInWithPhoneResponse) {
+                        _status.value = value
+                    }
+                })
+            }
         } else {
             _status.value = SignInWithPhoneResponse.OnFailure(NullPointerException("mVerificationId is null"))
         }
@@ -76,6 +90,7 @@ class AuthViewModel @ViewModelInject constructor(
              */
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                 _verificationStatus.value = VerificationStatus.Success
+                Timber.d("onVerificationCompleted: credentials -> $credential")
             }
 
             /**
@@ -83,6 +98,7 @@ class AuthViewModel @ViewModelInject constructor(
              */
             override fun onVerificationFailed(exception: FirebaseException) {
                 _verificationStatus.value = VerificationStatus.Failed(exception)
+                Timber.d("onVerificationFailed: exception -> $exception")
             }
 
             /**
@@ -94,6 +110,8 @@ class AuthViewModel @ViewModelInject constructor(
             ) {
                 super.onCodeSent(verificationId, token)
                 mVerificationId = verificationId
+                _verificationStatus.value = VerificationStatus.Pending
+                Timber.d("onCodeSent: verificationId -> $verificationId , token -> $token")
             }
 
             /**
@@ -102,11 +120,13 @@ class AuthViewModel @ViewModelInject constructor(
             override fun onCodeAutoRetrievalTimeOut(verificationId: String) {
                 super.onCodeAutoRetrievalTimeOut(verificationId)
                 mVerificationId = verificationId
+                _verificationStatus.value = VerificationStatus.Pending
+                Timber.d("onCodeAutoRetrievalTimeOut: verificationId -> $verificationId")
             }
         }
 
     private fun createPhoneAuthCredentials(code: String) = authRepository.getPhoneAuthCredential(
-        PhoneAuthCredentialRequest(mVerificationId!!, code)
+        PhoneAuthCredentialRequest(mVerificationId, code)
     )
 
 }

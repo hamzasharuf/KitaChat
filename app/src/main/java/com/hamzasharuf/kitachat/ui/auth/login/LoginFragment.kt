@@ -16,9 +16,11 @@ import com.hamzasharuf.kitachat.utils.extensions.setInvisible
 import com.hamzasharuf.kitachat.utils.extensions.setVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login.*
+import kotlinx.coroutines.InternalCoroutinesApi
 import timber.log.Timber
 
 
+@InternalCoroutinesApi
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding>() {
 
@@ -32,7 +34,7 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding>() {
     }
 
     private fun setupObservers() {
-        viewModel.verificationStatus.observe(viewLifecycleOwner, {
+        viewModel.verificationStatus.observe(requireActivity(), {
             when (it) {
                 VerificationStatus.Processing -> {
                     progress_bar.setVisible()
@@ -43,8 +45,9 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding>() {
 
                     progress_bar.setInvisible()
                     btnNext.isEnabled = true
-                    Timber.d("Pending")
-                    findNavController().navigate(R.id.action_loginFragment_to_verificationFragment)
+                    Timber.d("Pending: phone number -> ${viewModel.phoneNumber}")
+                    val navigationAction = LoginFragmentDirections.actionLoginFragmentToVerificationFragment(viewModel.phoneNumber, viewModel.mVerificationId!!)
+                    findNavController().navigate(navigationAction)
                 }
                 VerificationStatus.Success -> {
                     progress_bar.setInvisible()

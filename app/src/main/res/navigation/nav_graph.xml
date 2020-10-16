@@ -59,5 +59,11 @@
             app:destination="@id/homeFragment"
             app:launchSingleTop="true"
             app:popUpToInclusive="true"/>
+        <argument
+            android:name="phone_number"
+            app:argType="string" />
+        <argument
+            android:name="verification_id"
+            app:argType="string" />
     </fragment>
 </navigation>

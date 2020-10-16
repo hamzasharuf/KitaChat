@@ -8,6 +8,7 @@ import com.hamzasharuf.kitachat.data.api.requests.PhoneAuthCredentialRequest
 import com.hamzasharuf.kitachat.data.api.requests.PhoneVerificationRequest
 import com.hamzasharuf.kitachat.data.api.requests.SignInWithPhoneCredentialRequest
 import com.hamzasharuf.kitachat.data.api.responses.SignInWithPhoneResponse
+import timber.log.Timber
 import javax.inject.Inject
 
 class AuthApi @Inject constructor() {
@@ -33,8 +34,10 @@ class AuthApi @Inject constructor() {
             .addOnCompleteListener(request.activity) { task ->
                 if (task.isSuccessful) {
                     val user = task.result?.user
+                    Timber.d("AuthApi --> Successful signIn")
                     status.value = user?.let { SignInWithPhoneResponse.OnSuccess(it) }
                 } else {
+                    Timber.d("AuthApi --> Failed to signIn: ${task.exception}")
                     status.value = task.exception?.let { SignInWithPhoneResponse.OnFailure(it) }
                 }
             }
