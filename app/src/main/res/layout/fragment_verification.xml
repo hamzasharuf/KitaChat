@@ -84,21 +84,83 @@
             android:textSize="16sp" />
 
 
-        <EditText
-            android:id="@+id/etCode"
+        <LinearLayout
+            android:id="@+id/llCodeEditTexts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:autofillHints="country code"
-            android:ems="6"
-            android:gravity="center_horizontal"
-            android:hint="@string/default_otp"
-            android:inputType="numberDecimal"
-            android:maxLength="6"
-            android:textColor="@color/black"
+            android:orientation="horizontal"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_profile_message" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_profile_message">
+
+            <EditText
+                android:id="@+id/etCode1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="2"
+                android:gravity="center"
+                android:backgroundTint="@color/dark_gray"
+                android:inputType="numberDecimal"
+                android:maxLength="1"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/etCode2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="2"
+                android:gravity="center"
+                android:backgroundTint="@color/dark_gray"
+                android:inputType="numberDecimal"
+                android:maxLength="1"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/etCode3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="2"
+                android:gravity="center"
+                android:backgroundTint="@color/dark_gray"
+                android:inputType="numberDecimal"
+                android:maxLength="1"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/etCode4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="2"
+                android:gravity="center"
+                android:backgroundTint="@color/dark_gray"
+                android:inputType="numberDecimal"
+                android:maxLength="1"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/etCode5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="2"
+                android:gravity="center"
+                android:backgroundTint="@color/dark_gray"
+                android:inputType="numberDecimal"
+                android:maxLength="1"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/etCode6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="2"
+                android:gravity="center"
+                android:backgroundTint="@color/dark_gray"
+                android:inputType="numberDecimal"
+                android:maxLength="1"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+
 
 
 
@@ -106,7 +168,7 @@
             android:id="@+id/materialTextView3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etCode"
+            app:layout_constraintTop_toBottomOf="@+id/llCodeEditTexts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

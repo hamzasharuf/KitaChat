@@ -88,9 +88,11 @@
                 android:drawableStart="@drawable/ic_add"
                 android:drawablePadding="7dp"
                 android:ems="4"
+                android:text="60"
                 android:gravity="center_horizontal"
                 android:hint="@string/germany_key"
                 android:textColor="@color/black"
+                android:backgroundTint="@color/colorPrimary"
                 android:inputType="phone"
                 android:maxLength="4" />
 
@@ -102,6 +104,8 @@
                 android:textColor="@color/black"
                 android:inputType="phone"
                 android:ems="10"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="5555555555"
                 android:hint="@string/phone_number"
                 android:maxLength="10" />
 
