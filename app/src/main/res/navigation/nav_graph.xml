@@ -44,8 +44,8 @@
             android:id="@+id/action_loginFragment_to_verificationFragment"
             app:destination="@id/verificationFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
+            android:id="@+id/action_loginFragment_to_profileSetupFragment"
+            app:destination="@id/profileSetupFragment"
             app:launchSingleTop="true"
             app:popUpToInclusive="true"/>
     </fragment>
@@ -55,8 +55,8 @@
         android:label="VerificationFragment"
         tools:layout="@layout/fragment_verification">
         <action
-            android:id="@+id/action_verificationFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
+            android:id="@+id/action_verificationFragment_to_profileSetupFragment"
+            app:destination="@id/profileSetupFragment"
             app:launchSingleTop="true"
             app:popUpToInclusive="true"/>
         <argument
@@ -65,5 +65,16 @@
         <argument
             android:name="verification_id"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileSetupFragment"
+        android:name="com.hamzasharuf.kitachat.ui.auth.setup.ProfileSetupFragment"
+        android:label="ProfileSetupFragment"
+        tools:layout="@layout/fragment_profile_setup">
+        <action
+            android:id="@+id/action_profileSetupFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

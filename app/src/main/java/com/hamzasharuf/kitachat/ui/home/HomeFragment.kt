@@ -8,8 +8,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.observe
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hamzasharuf.kitachat.R
@@ -22,7 +22,6 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
@@ -34,10 +33,11 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         setupPager()
         setupObservers()
         setupToolbar()
+
     }
 
     private fun setupObservers() {
-        viewModel.pagerState.observe(viewLifecycleOwner, {
+        viewModel.pagerState.observe(viewLifecycleOwner, Observer {
             changeFabIcon(it.ordinal)
         })
     }
@@ -68,7 +68,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Timber.d(viewPagerHome.currentItem.toString())
         return super.onOptionsItemSelected(item)
     }
 

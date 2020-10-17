@@ -1,6 +1,6 @@
 package com.hamzasharuf.kitachat.data.repositories
 
-import com.hamzasharuf.kitachat.data.api.auth.AuthApi
+import com.hamzasharuf.kitachat.data.api.AuthApi
 import com.hamzasharuf.kitachat.data.api.requests.PhoneAuthCredentialRequest
 import com.hamzasharuf.kitachat.data.api.requests.PhoneVerificationRequest
 import com.hamzasharuf.kitachat.data.api.requests.SignInWithPhoneCredentialRequest

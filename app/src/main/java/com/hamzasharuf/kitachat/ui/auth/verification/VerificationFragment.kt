@@ -18,8 +18,6 @@ import com.hamzasharuf.kitachat.utils.extensions.setVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_verification.*
 import kotlinx.coroutines.InternalCoroutinesApi
-import timber.log.Timber
-import java.lang.NullPointerException
 
 @InternalCoroutinesApi
 @AndroidEntryPoint
@@ -30,10 +28,9 @@ class VerificationFragment : BaseFragment<AuthViewModel, FragmentVerificationBin
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Timber.d("phone_number -> ${args.phoneNumber}, verificationId -> ${args.verificationId}")
         viewModel.phoneNumber = args.phoneNumber
         viewModel.mVerificationId = args.verificationId
-        tv_login_warning.text = getVerificationMessage(viewModel.phoneNumber)
+        tv_profile_message.text = getVerificationMessage(viewModel.phoneNumber)
         tv_login_phone_number.text = viewModel.phoneNumber
         setupClickListeners()
         setupObservers()
@@ -43,14 +40,12 @@ class VerificationFragment : BaseFragment<AuthViewModel, FragmentVerificationBin
         viewModel.status.observe(requireActivity(), {
             when (it) {
                 is SignInWithPhoneResponse.OnSuccess -> {
-                    Timber.d("VerificationFragment -> Success")
                     progress_bar.setInvisible()
-                    findNavController().navigate(R.id.action_verificationFragment_to_homeFragment)
+                    findNavController().navigate(R.id.action_verificationFragment_to_profileSetupFragment)
                 }
                 is SignInWithPhoneResponse.OnFailure -> {
                     progress_bar.setInvisible()
                     btnVerify.isEnabled = true
-                    Timber.e("VerificationFragment -> Failure -> ${it.exception}")
                     when (it.exception) {
                         is FirebaseAuthInvalidCredentialsException ->
                             Toast.makeText(requireContext(), "Invalid verification code", Toast.LENGTH_SHORT).show()
@@ -63,7 +58,6 @@ class VerificationFragment : BaseFragment<AuthViewModel, FragmentVerificationBin
                 SignInWithPhoneResponse.OnLoading -> {
                     progress_bar.setVisible()
                     btnVerify.isEnabled = false
-                    Timber.d("VerificationFragment -> Loading")
                 }
             }
         })

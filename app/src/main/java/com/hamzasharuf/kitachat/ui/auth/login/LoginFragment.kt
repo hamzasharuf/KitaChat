@@ -17,7 +17,6 @@ import com.hamzasharuf.kitachat.utils.extensions.setVisible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.coroutines.InternalCoroutinesApi
-import timber.log.Timber
 
 
 @InternalCoroutinesApi
@@ -39,21 +38,18 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding>() {
                 VerificationStatus.Processing -> {
                     progress_bar.setVisible()
                     btnNext.isEnabled = false
-                    Timber.d("Processing")
                 }
                 VerificationStatus.Pending -> {
 
                     progress_bar.setInvisible()
                     btnNext.isEnabled = true
-                    Timber.d("Pending: phone number -> ${viewModel.phoneNumber}")
                     val navigationAction = LoginFragmentDirections.actionLoginFragmentToVerificationFragment(viewModel.phoneNumber, viewModel.mVerificationId!!)
                     findNavController().navigate(navigationAction)
                 }
                 VerificationStatus.Success -> {
                     progress_bar.setInvisible()
                     btnNext.isEnabled = true
-                    Timber.d("Success")
-                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                    findNavController().navigate(R.id.action_loginFragment_to_profileSetupFragment)
                 }
                 is VerificationStatus.Failed -> {
                     progress_bar.setInvisible()
@@ -64,7 +60,6 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding>() {
                         is FirebaseTooManyRequestsException ->
                             Toast.makeText(requireContext(), "Something went wrong, try again later", Toast.LENGTH_SHORT).show()
                         else ->{
-                            Timber.d("Something went wrong: ${it.exception}")
                             Toast.makeText(requireContext(), "Something went wrong, try again later", Toast.LENGTH_SHORT).show()
                             }
                     }

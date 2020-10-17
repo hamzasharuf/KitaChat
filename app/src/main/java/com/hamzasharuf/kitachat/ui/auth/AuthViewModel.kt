@@ -19,16 +19,20 @@ import com.hamzasharuf.kitachat.data.repositories.AuthRepository
 import com.hamzasharuf.kitachat.ui.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.flow.FlowCollector
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.lang.NullPointerException
 import java.util.concurrent.TimeUnit
 
 @InternalCoroutinesApi
-class AuthViewModel @ViewModelInject constructor(
+class
+AuthViewModel @ViewModelInject constructor(
     private val authRepository: AuthRepository
 ) : BaseViewModel() {
+
+    companion object{
+        private const val VERIFICATION_TIMEOUT = 60L
+    }
 
     lateinit var mVerificationId: String
     lateinit var phoneNumber: String
@@ -46,7 +50,7 @@ class AuthViewModel @ViewModelInject constructor(
         authRepository.verifyPhoneNumber(
             PhoneVerificationRequest(
                 phoneNumber = phoneNumber,
-                timeoutDuration = 60,
+                timeoutDuration = VERIFICATION_TIMEOUT,
                 timeUnit = TimeUnit.SECONDS,
                 activity = activity,
                 onVerificationStateChangedCallbacks = onVerificationStateChangedCallbacks
@@ -65,11 +69,10 @@ class AuthViewModel @ViewModelInject constructor(
             viewModelScope.launch(Main) {
                 authRepository.signInWithPhoneAuthCredential(
                     SignInWithPhoneCredentialRequest(credential, activity)
-                ).asFlow().collect(object : FlowCollector<SignInWithPhoneResponse> {
-                    override suspend fun emit(value: SignInWithPhoneResponse) {
-                        _status.value = value
-                    }
-                })
+                ).asFlow().collect {
+                    _status.value = it
+                }
+
             }
         } else {
             _status.value = SignInWithPhoneResponse.OnFailure(NullPointerException("mVerificationId is null"))
@@ -90,7 +93,6 @@ class AuthViewModel @ViewModelInject constructor(
              */
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                 _verificationStatus.value = VerificationStatus.Success
-                Timber.d("onVerificationCompleted: credentials -> $credential")
             }
 
             /**
@@ -98,7 +100,6 @@ class AuthViewModel @ViewModelInject constructor(
              */
             override fun onVerificationFailed(exception: FirebaseException) {
                 _verificationStatus.value = VerificationStatus.Failed(exception)
-                Timber.d("onVerificationFailed: exception -> $exception")
             }
 
             /**
@@ -111,18 +112,17 @@ class AuthViewModel @ViewModelInject constructor(
                 super.onCodeSent(verificationId, token)
                 mVerificationId = verificationId
                 _verificationStatus.value = VerificationStatus.Pending
-                Timber.d("onCodeSent: verificationId -> $verificationId , token -> $token")
             }
 
-            /**
-             * Optional. This method is called after the timeout duration specified to verifyPhoneNumber has passed without onVerificationCompleted triggering first. On devices without SIM cards, this method is called immediately because SMS auto-retrieval isn't possible.
-             */
-            override fun onCodeAutoRetrievalTimeOut(verificationId: String) {
-                super.onCodeAutoRetrievalTimeOut(verificationId)
-                mVerificationId = verificationId
-                _verificationStatus.value = VerificationStatus.Pending
-                Timber.d("onCodeAutoRetrievalTimeOut: verificationId -> $verificationId")
-            }
+//            /**
+//             * Optional. This method is called after the timeout duration specified to verifyPhoneNumber has passed without onVerificationCompleted triggering first. On devices without SIM cards, this method is called immediately because SMS auto-retrieval isn't possible.
+//             */
+//            override fun onCodeAutoRetrievalTimeOut(verificationId: String) {
+//                super.onCodeAutoRetrievalTimeOut(verificationId)
+//                mVerificationId = verificationId
+//                _verificationStatus.value = VerificationStatus.Pending
+//                Timber.d("onCodeAutoRetrievalTimeOut: verificationId -> $verificationId")
+//            }
         }
 
     private fun createPhoneAuthCredentials(code: String) = authRepository.getPhoneAuthCredential(
