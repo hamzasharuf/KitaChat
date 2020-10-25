@@ -18,4 +18,6 @@ class UserRepository @Inject constructor(
     }
 
     fun getCurrentUser() = userApi.getCurrentUser()
+
+    fun getUserInfo(uid: String) = firestoreApi.getUserInfo(uid)
 }

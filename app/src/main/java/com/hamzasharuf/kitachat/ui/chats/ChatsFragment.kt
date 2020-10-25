@@ -3,20 +3,16 @@ package com.hamzasharuf.kitachat.ui.chats
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.hamzasharuf.kitachat.R
-import com.hamzasharuf.kitachat.data.database.DummyDataSource.getChatsList
+import com.hamzasharuf.kitachat.data.database.DummyDataSource.getEmptyChatsList
 import com.hamzasharuf.kitachat.databinding.FragmentChatsBinding
 import com.hamzasharuf.kitachat.ui.base.BaseFragment
 import com.hamzasharuf.kitachat.utils.adapters.list.chats.ChatsClickListener
 import com.hamzasharuf.kitachat.utils.adapters.list.chats.ChatsListAdapter
-import com.hamzasharuf.kitachat.utils.view.MarginItemDecoration
 import com.hamzasharuf.kitachat.utils.view.SpeedyLinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_chats.*
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.launch
 
 class ChatsFragment : BaseFragment<ChatsViewModel, FragmentChatsBinding>() {
 
@@ -25,7 +21,8 @@ class ChatsFragment : BaseFragment<ChatsViewModel, FragmentChatsBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        val list = getChatsList()
+//        val list = getChatsList()
+        val list = getEmptyChatsList()
         mAdapter.submitList(list)
         mAdapter.notifyDataSetChanged()
 

@@ -22,7 +22,7 @@ class CallsFragment : BaseFragment<CallsViewModel, FragmentCallsBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-        val list = DummyDataSource.getCallsList()
+        val list = DummyDataSource.getEmptyCallsList()
         mAdapter.submitList(list)
         mAdapter.notifyDataSetChanged()
     }

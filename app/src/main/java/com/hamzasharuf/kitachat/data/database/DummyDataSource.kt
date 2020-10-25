@@ -5,6 +5,10 @@ import com.hamzasharuf.kitachat.data.models.Chat
 import com.hamzasharuf.kitachat.utils.adapters.list.calls.CallType
 
 object DummyDataSource {
+
+    fun getEmptyChatsList() = listOf<Chat>()
+    fun getEmptyCallsList() = listOf<Call>()
+
     fun getChatsList() = listOf(
         Chat(
             "2",

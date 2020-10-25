@@ -10,6 +10,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hamzasharuf.kitachat.R
@@ -68,6 +69,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val settings = R.id.settings_menu_item
+        when(item.itemId){
+            settings -> findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
+        }
         return super.onOptionsItemSelected(item)
     }
 

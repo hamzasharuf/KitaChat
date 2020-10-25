@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.hamzasharuf.kitachat.ui.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.hamzasharuf.kitachat.ui.splash.SplashFragment"
@@ -77,4 +81,8 @@
             app:launchSingleTop="true"
             app:popUpToInclusive="true"/>
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.hamzasharuf.kitachat.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>
