@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 class ProfileSetupViewModel @ViewModelInject constructor(
-    private val repository: UserRepository
+    private val repository: UserRepository,
 ) : BaseViewModel() {
     private val _updateUserProfileStatus = MutableLiveData<UpdateUserProfileResponse>()
     val updateUserProfileProfileStatus: LiveData<UpdateUserProfileResponse>
@@ -28,11 +28,12 @@ class ProfileSetupViewModel @ViewModelInject constructor(
         _updateUserProfileStatus.value = UpdateUserProfileResponse.OnLoading
         val user = createUser(userName)
         updateFirestoreProfile(user)
+        cacheUserToDatabase(user)
     }
 
     private fun createUser(userName: String): User {
         // TODO :: Logoff [send to register screen] if null
-        val currentUser = repository.getCurrentUser() ?: throw IllegalAccessError("User not found")
+        val currentUser = repository.getCurrentUserApi() ?: throw IllegalAccessError("User not found")
         return User(
             userID = currentUser.uid,
             userName = userName,
@@ -49,6 +50,10 @@ class ProfileSetupViewModel @ViewModelInject constructor(
                 _updateUserProfileStatus.value = it
             }
         }
+    }
+
+    private fun cacheUserToDatabase(user: User) {
+        viewModelScope.launch(Main){ repository.insertUserCache(user) }
     }
 
 

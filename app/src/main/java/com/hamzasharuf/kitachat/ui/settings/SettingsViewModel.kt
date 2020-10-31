@@ -24,8 +24,8 @@ class SettingsViewModel @ViewModelInject constructor(
 
     fun getUserInfo(){
         viewModelScope.launch(Main){
-            val uid: String = userRepository.getCurrentUser()!!.uid
-            userRepository.getUserInfo(uid).asFlow().collect {
+            val uid: String = userRepository.getCurrentUserApi()!!.uid
+            userRepository.getUserInfoApi(uid).asFlow().collect {
                 _userInfoStatus.value = it
             }
         }

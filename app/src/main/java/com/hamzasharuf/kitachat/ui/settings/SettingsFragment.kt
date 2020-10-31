@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.hamzasharuf.kitachat.R
 import com.hamzasharuf.kitachat.data.api.responses.UserInfoResponse
 import com.hamzasharuf.kitachat.databinding.FragmentSettingsBinding
 import com.hamzasharuf.kitachat.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_settings.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
@@ -21,6 +23,13 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         super.onViewCreated(view, savedInstanceState)
         setupObservers()
         viewModel.getUserInfo()
+        setupClickListeners()
+    }
+
+    private fun setupClickListeners() {
+        ln_profile.setOnClickListener {
+            findNavController().navigate(R.id.action_settingsFragment_to_profileFragment)
+        }
     }
 
     private fun setupObservers() {
