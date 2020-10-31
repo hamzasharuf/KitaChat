@@ -50,4 +50,7 @@
     <string name="network_usage_auto_download">Network usage, auto-download</string>
     <string name="help">Help</string>
     <string name="faq_contact_us_privacy_policy">FAQ, contact us, privacy policy</string>
+    <string name="phone">Phone</string>
+    <string name="sign_out">SIGN OUT</string>
+    <string name="about">About</string>
 </resources>

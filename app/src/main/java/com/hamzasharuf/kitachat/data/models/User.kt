@@ -1,7 +1,6 @@
 package com.hamzasharuf.kitachat.data.models
 
 import com.google.firebase.Timestamp
-import java.util.*
 
 data class User(
     val userID: String = "",
@@ -9,9 +8,9 @@ data class User(
     val userPhone: String = "",
     val imageProfile: String = "",
     val status: String = "",
+    val gender: String = "male",
+    val imageCover: String = "",
+    val email: String = "",
+    val dateOfBirth: String = "",
     val registeredAt: Timestamp = Timestamp.now(),
-    val imageCover: String? = "",
-    val email: String? = "",
-    val dateOfBirth: String? = "",
-    val gender: String? = "",
-    )
+)
