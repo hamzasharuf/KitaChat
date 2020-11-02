@@ -1,9 +1,8 @@
 package com.hamzasharuf.kitachat.ui.settings.profile
 
-import androidx.lifecycle.ViewModel
+import androidx.hilt.lifecycle.ViewModelInject
 import com.hamzasharuf.kitachat.ui.base.BaseViewModel
-import javax.inject.Inject
 
-class ProfileViewModel @Inject constructor() : BaseViewModel() {
+class ProfileViewModel @ViewModelInject constructor() : BaseViewModel() {
 
 }

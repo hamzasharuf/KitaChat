@@ -53,4 +53,7 @@
     <string name="phone">Phone</string>
     <string name="sign_out">SIGN OUT</string>
     <string name="about">About</string>
+    <string name="profile_photo">Profile photo</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
 </resources>

@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.hamzasharuf.kitachat.R
+import com.hamzasharuf.kitachat.utils.common.CommonFunctions.changeStatusBarColor
 import com.hamzasharuf.kitachat.utils.common.CommonFunctions.hideStatusBar
 import com.hamzasharuf.kitachat.utils.common.CommonFunctions.showStatusBar
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,8 +44,8 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener{
                 _, destination, _ ->
             when(destination.id){
-                R.id.splashFragment -> hideStatusBar(this)
-                else -> showStatusBar(this)
+                R.id.splashFragment -> changeStatusBarColor(this, R.color.splash_background)
+                else -> changeStatusBarColor(this, R.color.colorPrimaryDark)
             }
         }
     }

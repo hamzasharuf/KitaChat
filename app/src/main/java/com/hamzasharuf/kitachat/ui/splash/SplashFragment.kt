@@ -18,6 +18,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class SplashFragment : BaseFragment<SplashViewModel, FragmentSplashBinding>() {
@@ -30,6 +31,7 @@ class SplashFragment : BaseFragment<SplashViewModel, FragmentSplashBinding>() {
         navigateToHome()
     }
 
+
     private fun navigateToHome() {
         lifecycleScope.launch(Main) {
 
@@ -38,10 +40,11 @@ class SplashFragment : BaseFragment<SplashViewModel, FragmentSplashBinding>() {
             val cachedUser = sharedViewModel.cachedUser
             val firebaseUser = sharedViewModel.firebaseUser
 
+
             if (cachedUser.isNotNull() && firebaseUser.isNotNull())
-                findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
             else
-                findNavController().navigate(R.id.action_splashFragment_to_welcomeFragment)
+                findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToWelcomeFragment())
 
         }
     }
